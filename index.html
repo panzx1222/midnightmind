@@ -318,7 +318,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
       <h1>夜深了，<br><span class="glow">模型还醒着。</span></h1>
       <p class="lead">MidnightMind API 用<strong>一个 Key</strong>聚合 DeepSeek、Kimi、GLM、Qwen 等主流开源大模型。统一接口、智能路由、按量计费——让你的应用在任何时刻都有最聪明的大脑在线。</p>
       <div class="hero-actions">
-        <a href="#" data-go="/register" class="btn btn-moon btn-lg">免费开始使用 →</a>
+        <a href="https://midnightmind.net/register" target="_top" class="btn btn-moon btn-lg">免费开始使用 →</a>
         <a href="#quickstart" class="btn btn-lg">查看接入文档</a>
       </div>
       <div class="hero-meta">
@@ -334,7 +334,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
       </div>
       <div class="term">
         <div class="term-bar"><span class="d"></span><span class="d"></span><span class="d"></span><em>POST /v1/chat/completions</em></div>
-<pre><span class="k">curl</span> https://api.midnightmind.ai/v1/chat/completions \
+<pre><span class="k">curl</span> https://midnightmind.net/v1/chat/completions \
   -H <span class="s">"Authorization: Bearer $MM_API_KEY"</span> \
   -d <span class="s">'{
     "model": "<span class="rot"><span><b>deepseek-chat",</b><b>kimi-k2",</b><b>glm-4",</b><b>qwen3",</b><b>minimax-m1",</b><b>deepseek-chat",</b></span></span>
@@ -407,7 +407,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
       <article class="model more reveal">
         <h3>+ 更多模型持续上线</h3>
         <p>豆包、阶跃星辰、混元、Llama 等更多模型，以及 Embedding / Rerank 接口。</p>
-        <a href="#" data-go="/pricing" class="btn">查看全部模型与价格 →</a>
+        <a href="https://midnightmind.net/pricing" target="_top" class="btn">查看全部模型与价格 →</a>
       </article>
     </div>
   </div>
@@ -475,7 +475,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
 
 client = OpenAI(
     api_key=<span class="s">"sk-mm-xxxxxxxx"</span>,
-    base_url=<span class="s">"https://api.midnightmind.ai/v1"</span>,
+    base_url=<span class="s">"https://midnightmind.net/v1"</span>,
 )
 
 resp = client.chat.completions.create(
@@ -489,7 +489,7 @@ resp = client.chat.completions.create(
 
 <span class="k">const</span> client = <span class="k">new</span> OpenAI({
   apiKey: <span class="s">"sk-mm-xxxxxxxx"</span>,
-  baseURL: <span class="s">"https://api.midnightmind.ai/v1"</span>,
+  baseURL: <span class="s">"https://midnightmind.net/v1"</span>,
 });
 
 <span class="k">const</span> resp = <span class="k">await</span> client.chat.completions.create({
@@ -497,7 +497,7 @@ resp = client.chat.completions.create(
   messages: [{ role: <span class="s">"user"</span>, content: <span class="s">"你好，MidnightMind"</span> }],
 });
 console.log(resp.choices[<span class="p">0</span>].message.content);</pre>
-<pre class="code c-sh"><span class="k">curl</span> https://api.midnightmind.ai/v1/chat/completions \
+<pre class="code c-sh"><span class="k">curl</span> https://midnightmind.net/v1/chat/completions \
   -H <span class="s">"Content-Type: application/json"</span> \
   -H <span class="s">"Authorization: Bearer sk-mm-xxxxxxxx"</span> \
   -d <span class="s">'{
@@ -523,14 +523,14 @@ console.log(resp.choices[<span class="p">0</span>].message.content);</pre>
         <p class="desc">个人开发者与尝鲜用户</p>
         <div class="price">¥0<small>起</small></div>
         <ul><li>注册赠送体验额度</li><li>全部模型可调用</li><li>标准速率限制</li><li>社区支持</li></ul>
-        <a href="#" data-go="/register" class="btn">免费注册</a>
+        <a href="https://midnightmind.net/register" target="_top" class="btn">免费注册</a>
       </div>
       <div class="plan hot reveal">
         <h3>月光 · 按量付费</h3>
         <p class="desc">初创团队与生产应用</p>
         <div class="price">按 Token<small>计费</small></div>
         <ul><li>余额充值，随用随扣</li><li>更高并发与速率</li><li>智能路由 + 自动容灾</li><li>用量明细与多 Key 管理</li><li>工单优先响应</li></ul>
-        <a href="#" data-go="/pricing" class="btn btn-moon">查看模型价格</a>
+        <a href="https://midnightmind.net/pricing" target="_top" class="btn btn-moon">查看模型价格</a>
       </div>
       <div class="plan reveal">
         <h3>银河 · 企业版</h3>
@@ -568,8 +568,8 @@ console.log(resp.choices[<span class="p">0</span>].message.content);</pre>
       <h2>当世界入睡，<span style="color:var(--moon)">你的 AI 依然清醒</span></h2>
       <p>立即注册 MidnightMind API，用一个 Key 唤醒所有开源大模型。</p>
       <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-        <a href="#" data-go="/register" class="btn btn-moon btn-lg">获取 API Key →</a>
-        <a href="#" data-go="/login" class="btn btn-lg">登录控制台</a>
+        <a href="https://midnightmind.net/register" target="_top" class="btn btn-moon btn-lg">获取 API Key →</a>
+        <a href="https://midnightmind.net/login" target="_top" class="btn btn-lg">登录控制台</a>
       </div>
     </div>
   </div>
@@ -580,10 +580,10 @@ console.log(resp.choices[<span class="p">0</span>].message.content);</pre>
   <div class="wrap">
     <div class="foot">
       <div>
-        <a href="#" data-go="/" class="logo" style="margin-bottom:14px"><span>Midnight<b>Mind</b> API</span></a>
+        <a href="https://midnightmind.net/" target="_top" class="logo" style="margin-bottom:14px"><span>Midnight<b>Mind</b> API</span></a>
         <p style="max-width:320px">开源大模型聚合 API 平台。一个 Key，统一接入 DeepSeek、Kimi、GLM、Qwen 等模型。</p>
       </div>
-      <div><h5>产品</h5><ul><li><a href="#models">模型广场</a></li><li><a href="#" data-go="/pricing">模型价格</a></li><li><a href="#" data-go="/login">控制台</a></li><li><a href="#">服务状态</a></li></ul></div>
+      <div><h5>产品</h5><ul><li><a href="#models">模型广场</a></li><li><a href="https://midnightmind.net/pricing" target="_top">模型价格</a></li><li><a href="https://midnightmind.net/login" target="_top">控制台</a></li><li><a href="#">服务状态</a></li></ul></div>
       <div><h5>开发者</h5><ul><li><a href="#">API 文档</a></li><li><a href="#quickstart">快速开始</a></li><li><a href="#">SDK 示例</a></li><li><a href="#">更新日志</a></li></ul></div>
       <div><h5>关于</h5><ul><li><a href="#">联系我们</a></li><li><a href="#">服务条款</a></li><li><a href="#">隐私政策</a></li></ul></div>
     </div>
@@ -621,17 +621,6 @@ console.log(resp.choices[<span class="p">0</span>].message.content);</pre>
     if(!reduce)requestAnimationFrame(frame);
   }
   size();addEventListener('resize',size);frame();
-})();
-
-/* 嵌入 iframe 时：按钮跳回主站并在顶层窗口打开 */
-(function(){
-  const inFrame=window.top!==window.self;
-  let base='';
-  try{ if(inFrame&&document.referrer) base=new URL(document.referrer).origin }catch(e){}
-  document.querySelectorAll('[data-go]').forEach(a=>{
-    a.href=base+a.dataset.go;
-    if(inFrame) a.target='_top';
-  });
 })();
 
 /* 复制 */
