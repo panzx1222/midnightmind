@@ -94,6 +94,16 @@ h1 .glow{
 .lead{font-size:18px;color:var(--muted);max-width:540px}
 .lead strong{color:var(--text);font-weight:500}
 .hero-actions{display:flex;gap:14px;margin:36px 0 30px;flex-wrap:wrap}
+.flow{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin:34px 0 28px;padding:0}
+.flow li{display:flex;align-items:center;gap:10px;padding:10px 16px 10px 10px;border-radius:14px;font-size:14.5px;
+  background:rgba(246,220,158,.07);border:1px solid rgba(246,220,158,.22);color:var(--text)}
+.flow li i{font-style:normal;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:13px;
+  background:linear-gradient(135deg,var(--moon),var(--moon-2));color:#1a1206}
+.flow-center{justify-content:center;margin:0}
+.note{font-family:var(--mono);font-size:13px;color:var(--moon);margin-top:4px}
+.plan-note{margin-top:auto;padding-top:18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);text-align:center}
+.hot-note{color:var(--moon)}
+.foot-api code{display:inline-block;font-family:var(--mono);color:var(--moon);background:rgba(246,220,158,.07);border:1px solid rgba(246,220,158,.22);padding:6px 12px;border-radius:10px;margin-bottom:10px}
 .hero-meta{display:flex;gap:26px;flex-wrap:wrap;font-size:13.5px;color:var(--muted)}
 .hero-meta span{display:flex;align-items:center;gap:8px}
 .hero-meta span::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok)}
@@ -266,7 +276,7 @@ details p{color:var(--muted);margin-top:12px;font-size:15px}
 
 /* Footer */
 footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;color:var(--muted);font-size:14px}
-.foot{display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:40px}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px}
 .foot h5{color:var(--text);font-size:14px;margin-bottom:14px;font-weight:500}
 .foot ul{list-style:none;display:flex;flex-direction:column;gap:9px}
 .foot a:hover{color:var(--moon)}
@@ -288,7 +298,6 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
   .features{grid-template-columns:1fr 1fr}
   .feat,.feat.wide{grid-column:span 1}
   .stats{grid-template-columns:1fr 1fr}
-  .foot{grid-template-columns:1fr 1fr}
   .nav ul{display:none}
   .moon{width:180px;height:180px;right:-50px;top:-30px}
 }
@@ -300,7 +309,6 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
   .nav-cta .btn:not(.btn-moon){display:none}
   .stat{padding:24px 18px}.stat b{font-size:32px}
   .term pre{font-size:12px}
-  .foot{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -317,10 +325,11 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
       <span class="badge"><i>NEW</i>OpenAI 协议兼容 · 改一行 base_url 即可切换</span>
       <h1>夜深了，<br><span class="glow">模型还醒着。</span></h1>
       <p class="lead">MidnightMind API 用<strong>一个 Key</strong>聚合 DeepSeek、Kimi、GLM、Qwen 等主流开源大模型。统一接口、智能路由、按量计费——让你的应用在任何时刻都有最聪明的大脑在线。</p>
-      <div class="hero-actions">
-        <a href="https://midnightmind.net/register" target="_top" class="btn btn-moon btn-lg">免费开始使用 →</a>
-        <a href="#quickstart" class="btn btn-lg">查看接入文档</a>
-      </div>
+      <ol class="flow">
+        <li><i>1</i>注册登录</li>
+        <li><i>2</i>创建令牌 Key</li>
+        <li><i>3</i>替换 base_url</li>
+      </ol>
       <div class="hero-meta">
         <span>7×24 小时在线</span><span>多上游自动容灾</span><span>无月费 · 用多少付多少</span>
       </div>
@@ -407,7 +416,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
       <article class="model more reveal">
         <h3>+ 更多模型持续上线</h3>
         <p>豆包、阶跃星辰、混元、Llama 等更多模型，以及 Embedding / Rerank 接口。</p>
-        <a href="https://midnightmind.net/pricing" target="_top" class="btn">查看全部模型与价格 →</a>
+        <span class="note">✦ 完整模型列表与实时单价，请在顶部导航中查看</span>
       </article>
     </div>
   </div>
@@ -523,21 +532,21 @@ console.log(resp.choices[<span class="p">0</span>].message.content);</pre>
         <p class="desc">个人开发者与尝鲜用户</p>
         <div class="price">¥0<small>起</small></div>
         <ul><li>注册赠送体验额度</li><li>全部模型可调用</li><li>标准速率限制</li><li>社区支持</li></ul>
-        <a href="https://midnightmind.net/register" target="_top" class="btn">免费注册</a>
+        <div class="plan-note">注册即可免费体验</div>
       </div>
       <div class="plan hot reveal">
         <h3>月光 · 按量付费</h3>
         <p class="desc">初创团队与生产应用</p>
         <div class="price">按 Token<small>计费</small></div>
         <ul><li>余额充值，随用随扣</li><li>更高并发与速率</li><li>智能路由 + 自动容灾</li><li>用量明细与多 Key 管理</li><li>工单优先响应</li></ul>
-        <a href="https://midnightmind.net/pricing" target="_top" class="btn btn-moon">查看模型价格</a>
+        <div class="plan-note hot-note">登录控制台即可在线充值</div>
       </div>
       <div class="plan reveal">
         <h3>银河 · 企业版</h3>
         <p class="desc">大规模调用与定制需求</p>
         <div class="price">定制<small>报价</small></div>
         <ul><li>阶梯折扣与专属价格</li><li>专属通道与 SLA 保障</li><li>对公转账与发票</li><li>专属技术对接群</li></ul>
-        <a href="#" class="btn">联系商务</a>
+        <div class="plan-note">登录后提交工单联系我们</div>
       </div>
     </div>
   </div>
@@ -567,10 +576,11 @@ console.log(resp.choices[<span class="p">0</span>].message.content);</pre>
       <span class="eyebrow">// Ready when you are</span>
       <h2>当世界入睡，<span style="color:var(--moon)">你的 AI 依然清醒</span></h2>
       <p>立即注册 MidnightMind API，用一个 Key 唤醒所有开源大模型。</p>
-      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-        <a href="https://midnightmind.net/register" target="_top" class="btn btn-moon btn-lg">获取 API Key →</a>
-        <a href="https://midnightmind.net/login" target="_top" class="btn btn-lg">登录控制台</a>
-      </div>
+      <ol class="flow flow-center">
+        <li><i>1</i>注册登录</li>
+        <li><i>2</i>创建令牌 Key</li>
+        <li><i>3</i>替换 base_url</li>
+      </ol>
     </div>
   </div>
 </section>
@@ -580,12 +590,10 @@ console.log(resp.choices[<span class="p">0</span>].message.content);</pre>
   <div class="wrap">
     <div class="foot">
       <div>
-        <a href="https://midnightmind.net/" target="_top" class="logo" style="margin-bottom:14px"><span>Midnight<b>Mind</b> API</span></a>
+        <span class="logo" style="margin-bottom:14px"><span>Midnight<b>Mind</b> API</span></span>
         <p style="max-width:320px">开源大模型聚合 API 平台。一个 Key，统一接入 DeepSeek、Kimi、GLM、Qwen 等模型。</p>
       </div>
-      <div><h5>产品</h5><ul><li><a href="#models">模型广场</a></li><li><a href="https://midnightmind.net/pricing" target="_top">模型价格</a></li><li><a href="https://midnightmind.net/login" target="_top">控制台</a></li><li><a href="#">服务状态</a></li></ul></div>
-      <div><h5>开发者</h5><ul><li><a href="#">API 文档</a></li><li><a href="#quickstart">快速开始</a></li><li><a href="#">SDK 示例</a></li><li><a href="#">更新日志</a></li></ul></div>
-      <div><h5>关于</h5><ul><li><a href="#">联系我们</a></li><li><a href="#">服务条款</a></li><li><a href="#">隐私政策</a></li></ul></div>
+      <div class="foot-api"><h5>接口地址</h5><code>https://midnightmind.net/v1</code><p>兼容 OpenAI 协议 · 7×24 小时在线</p></div>
     </div>
     <div class="copyright"><span>© 2026 MidnightMind API. All rights reserved.</span><span>Made for the night owls 🌙</span></div>
   </div>
