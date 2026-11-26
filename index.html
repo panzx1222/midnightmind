@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js")</script>
 <title>MidnightMind API · 开源大模型聚合接口</title>
 <meta name="description" content="MidnightMind API：一个 Key，统一接入 DeepSeek、Kimi、GLM、Qwen 等主流开源大模型。OpenAI 协议兼容，按量计费，稳定低延迟。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -135,7 +136,22 @@ h1 .glow{
   font-family:var(--mono);font-size:12px;padding:6px 11px;border-radius:999px;border:1px solid var(--line);
   color:var(--muted);cursor:pointer;transition:.2s;background:transparent;
 }
-.chip.on,.chip:hover{color:#1a1206;background:var(--moon);border-color:var(--moon)}
+.chip{animation:chipOn 15s infinite}
+.chip:nth-child(2){animation-delay:3s}.chip:nth-child(3){animation-delay:6s}.chip:nth-child(4){animation-delay:9s}.chip:nth-child(5){animation-delay:12s}
+@keyframes chipOn{0%,18%{color:#1a1206;background:var(--moon);border-color:var(--moon)}20%,100%{color:var(--muted);background:transparent;border-color:var(--line)}}
+/* 纯 CSS 模型轮播 */
+.rot{display:inline-block;height:1.85em;overflow:hidden;vertical-align:top}
+.rot>span{display:block;animation:rot1 15s infinite}
+.rot b{display:block;font-weight:400;height:1.85em}
+.rot.r2{display:block;height:1.6em}.rot.r2 b{height:1.6em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rot.r2>span{animation-name:rot2}
+@keyframes rot1{0%,16%{transform:translateY(0)}20%,36%{transform:translateY(-1.85em)}40%,56%{transform:translateY(-3.7em)}60%,76%{transform:translateY(-5.55em)}80%,96%{transform:translateY(-7.4em)}100%{transform:translateY(-9.25em)}}
+@keyframes rot2{0%,16%{transform:translateY(0)}20%,36%{transform:translateY(-1.6em)}40%,56%{transform:translateY(-3.2em)}60%,76%{transform:translateY(-4.8em)}80%,96%{transform:translateY(-6.4em)}100%{transform:translateY(-8em)}}
+/* 无脚本时的 CSS 星空 */
+.sky-css,.sky-css2{position:fixed;inset:0;z-index:-2;pointer-events:none}
+.sky-css{background-image:radial-gradient(1.2px 1.2px at 20px 30px,#fff,transparent),radial-gradient(1px 1px at 120px 80px,#dfe6ff,transparent),radial-gradient(1.4px 1.4px at 200px 160px,#fff,transparent),radial-gradient(1px 1px at 60px 190px,#cfd8ff,transparent),radial-gradient(1px 1px at 170px 20px,#fff,transparent);background-size:230px 230px;animation:tw 5s ease-in-out infinite alternate}
+.sky-css2{background-image:radial-gradient(1.6px 1.6px at 50px 70px,#fff6dc,transparent),radial-gradient(1px 1px at 260px 210px,#fff,transparent),radial-gradient(1.2px 1.2px at 330px 40px,#dfe6ff,transparent),radial-gradient(1px 1px at 150px 300px,#fff,transparent);background-size:380px 380px;animation:tw 7s ease-in-out infinite alternate-reverse}
+@keyframes tw{from{opacity:.2}to{opacity:.7}}
+.js .sky-css,.js .sky-css2{display:none}
 
 /* ---------- 通用 Section ---------- */
 section{padding:100px 0;position:relative}
@@ -207,12 +223,15 @@ h2{font-size:clamp(30px,3.6vw,44px);font-weight:900;line-height:1.2;margin:14px 
   border:1px solid rgba(246,220,158,.4);color:var(--moon)}
 .step h4{font-size:17px;margin-bottom:4px}
 .step p{color:var(--muted);font-size:14.5px}
-.tabs{display:flex;gap:4px;padding:10px 12px 0;border-bottom:1px solid var(--line)}
-.tab{font-family:var(--mono);font-size:13px;color:var(--muted);padding:9px 14px;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
-.tab.on{color:var(--moon);border-color:var(--moon)}
-.code{display:none}.code.on{display:block}
-.copy{position:absolute;right:14px;top:58px;font-size:12px;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--muted);cursor:pointer;font-family:var(--mono)}
+.tabs input{position:absolute;opacity:0;pointer-events:none}
+.tabbar{display:flex;gap:4px;padding:10px 12px 0;border-bottom:1px solid var(--line)}
+.tabbar label{font-family:var(--mono);font-size:13px;color:var(--muted);padding:9px 14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.code{display:none}
+#t-py:checked~.tabbar label[for=t-py],#t-js:checked~.tabbar label[for=t-js],#t-sh:checked~.tabbar label[for=t-sh]{color:var(--moon);border-color:var(--moon)}
+#t-py:checked~.c-py,#t-js:checked~.c-js,#t-sh:checked~.c-sh{display:block}
+.copy{display:none;position:absolute;right:14px;top:58px;font-size:12px;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--muted);cursor:pointer;font-family:var(--mono)}
 .copy:hover{color:var(--text)}
+.js .copy{display:block}
 
 /* 价格 */
 .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
@@ -254,8 +273,8 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
 .copyright{margin-top:44px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px}
 
 /* 入场动画 */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
-.reveal.in{opacity:1;transform:none}
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.js .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
   .reveal{opacity:1;transform:none}
   .track{animation:none}
@@ -287,6 +306,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
 </head>
 <body>
 <div class="aurora"></div>
+<div class="sky-css"></div><div class="sky-css2"></div>
 <canvas id="sky"></canvas>
 
 <main>
@@ -317,20 +337,14 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
 <pre><span class="k">curl</span> https://api.midnightmind.ai/v1/chat/completions \
   -H <span class="s">"Authorization: Bearer $MM_API_KEY"</span> \
   -d <span class="s">'{
-    "model": "<span id="modelName">deepseek-chat</span>",
+    "model": "<span class="rot"><span><b>deepseek-chat",</b><b>kimi-k2",</b><b>glm-4",</b><b>qwen3",</b><b>minimax-m1",</b><b>deepseek-chat",</b></span></span>
     "messages": [{"role":"user","content":"午夜好"}]
   }'</span></pre>
-        <div class="term-out" id="termOut">
-          <span id="reply">“午夜好！这里是 DeepSeek，正在为你值守。”</span>
-          <span class="lat" id="lat">200 OK · 首字 312ms · 上游：deepseek</span>
+        <div class="term-out">
+          <span class="rot r2"><span><b>“午夜好！DeepSeek 正在为你值守。”</b><b>“晚上好，Kimi 在线，想聊点什么？”</b><b>“GLM 已就绪，随时帮你写代码。”</b><b>“通义千问在此，今晚探索什么？”</b><b>“MiniMax 报到，长文档交给我。”</b><b>“午夜好！DeepSeek 正在为你值守。”</b></span></span>
+          <span class="lat">200 OK · stream · 智能路由已选择最优上游</span>
         </div>
-        <div class="chips" role="tablist" aria-label="切换模型">
-          <button class="chip on" data-i="0">DeepSeek</button>
-          <button class="chip" data-i="1">Kimi</button>
-          <button class="chip" data-i="2">GLM</button>
-          <button class="chip" data-i="3">Qwen</button>
-          <button class="chip" data-i="4">MiniMax</button>
-        </div>
+        <div class="chips"><span class="chip">DeepSeek</span><span class="chip">Kimi</span><span class="chip">GLM</span><span class="chip">Qwen</span><span class="chip">MiniMax</span></div>
       </div>
     </div>
   </div>
@@ -348,10 +362,10 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
 <section style="padding-top:80px;padding-bottom:20px">
   <div class="wrap">
     <div class="stats reveal">
-      <div class="stat"><b data-count="30">0<small>+</small></b><span>可调用模型</span></div>
-      <div class="stat"><b data-count="99.9" data-dec="1">0<small>%</small></b><span>服务可用性目标</span></div>
-      <div class="stat"><b data-count="1">0<small>个 Key</small></b><span>统一鉴权与计费</span></div>
-      <div class="stat"><b data-count="24">0<small>h</small></b><span>全天候不打烊</span></div>
+      <div class="stat"><b data-count="30">30<small>+</small></b><span>可调用模型</span></div>
+      <div class="stat"><b data-count="99.9" data-dec="1">99.9<small>%</small></b><span>服务可用性目标</span></div>
+      <div class="stat"><b data-count="1">1<small>个 Key</small></b><span>统一鉴权与计费</span></div>
+      <div class="stat"><b data-count="24">24<small>h</small></b><span>全天候不打烊</span></div>
     </div>
   </div>
 </section>
@@ -452,15 +466,12 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
       <div class="step"><span class="n">2</span><div><h4>替换 base_url</h4><p>将 SDK 的接口地址指向 MidnightMind，原有代码无需改动。</p></div></div>
       <div class="step"><span class="n">3</span><div><h4>自由切换模型</h4><p>修改 <code style="font-family:var(--mono);color:var(--moon)">model</code> 参数，在 DeepSeek、Kimi、GLM 之间随心切换。</p></div></div>
     </div>
-    <div class="term reveal" style="position:relative">
+    <div class="term tabs reveal" style="position:relative">
       <div class="term-bar"><span class="d"></span><span class="d"></span><span class="d"></span><em>quickstart</em></div>
-      <div class="tabs" role="tablist">
-        <button class="tab on" data-t="py">Python</button>
-        <button class="tab" data-t="js">Node.js</button>
-        <button class="tab" data-t="sh">cURL</button>
-      </div>
+      <input type="radio" name="qs" id="t-py" checked><input type="radio" name="qs" id="t-js"><input type="radio" name="qs" id="t-sh">
+      <div class="tabbar"><label for="t-py">Python</label><label for="t-js">Node.js</label><label for="t-sh">cURL</label></div>
       <button class="copy" id="copyBtn">复制</button>
-<pre class="code on" data-c="py"><span class="k">from</span> openai <span class="k">import</span> OpenAI
+<pre class="code c-py"><span class="k">from</span> openai <span class="k">import</span> OpenAI
 
 client = OpenAI(
     api_key=<span class="s">"sk-mm-xxxxxxxx"</span>,
@@ -474,7 +485,7 @@ resp = client.chat.completions.create(
 )
 <span class="k">for</span> chunk <span class="k">in</span> resp:
     print(chunk.choices[<span class="p">0</span>].delta.content <span class="k">or</span> <span class="s">""</span>, end=<span class="s">""</span>)</pre>
-<pre class="code" data-c="js"><span class="k">import</span> OpenAI <span class="k">from</span> <span class="s">"openai"</span>;
+<pre class="code c-js"><span class="k">import</span> OpenAI <span class="k">from</span> <span class="s">"openai"</span>;
 
 <span class="k">const</span> client = <span class="k">new</span> OpenAI({
   apiKey: <span class="s">"sk-mm-xxxxxxxx"</span>,
@@ -486,7 +497,7 @@ resp = client.chat.completions.create(
   messages: [{ role: <span class="s">"user"</span>, content: <span class="s">"你好，MidnightMind"</span> }],
 });
 console.log(resp.choices[<span class="p">0</span>].message.content);</pre>
-<pre class="code" data-c="sh"><span class="k">curl</span> https://api.midnightmind.ai/v1/chat/completions \
+<pre class="code c-sh"><span class="k">curl</span> https://api.midnightmind.ai/v1/chat/completions \
   -H <span class="s">"Content-Type: application/json"</span> \
   -H <span class="s">"Authorization: Bearer sk-mm-xxxxxxxx"</span> \
   -d <span class="s">'{
@@ -612,33 +623,6 @@ console.log(resp.choices[<span class="p">0</span>].message.content);</pre>
   size();addEventListener('resize',size);frame();
 })();
 
-/* Hero 模型切换 */
-(function(){
-  const data=[
-    ['deepseek-chat','“午夜好！这里是 DeepSeek，正在为你值守。”','312ms','deepseek'],
-    ['kimi-k2','“晚上好，我是 Kimi，长夜漫漫，有什么想聊的？”','288ms','moonshot'],
-    ['glm-4','“你好，GLM 在线，随时准备帮你写代码。”','276ms','zhipu'],
-    ['qwen3','“通义千问已就绪，今晚想探索什么？”','301ms','qwen'],
-    ['minimax-m1','“MiniMax 报到，长文档交给我吧。”','334ms','minimax'],
-  ];
-  const nameEl=document.getElementById('modelName'),rep=document.getElementById('reply'),lat=document.getElementById('lat');
-  const chips=[...document.querySelectorAll('.chip')];let i=0,timer,typing;
-  function type(str){
-    clearInterval(typing);nameEl.textContent='';let k=0;
-    typing=setInterval(()=>{nameEl.textContent=str.slice(0,++k);if(k>=str.length)clearInterval(typing)},45);
-  }
-  function show(n){
-    i=n;const d=data[n];
-    chips.forEach((c,j)=>c.classList.toggle('on',j===n));
-    type(d[0]);rep.style.opacity=0;
-    setTimeout(()=>{rep.textContent=d[1];lat.textContent=`200 OK · 首字 ${d[2]} · 上游：${d[3]}`;rep.style.opacity=1},500);
-  }
-  rep.style.transition='opacity .3s';
-  chips.forEach(c=>c.addEventListener('click',()=>{show(+c.dataset.i);restart()}));
-  function restart(){clearInterval(timer);timer=setInterval(()=>show((i+1)%data.length),3600)}
-  restart();
-})();
-
 /* 嵌入 iframe 时：按钮跳回主站并在顶层窗口打开 */
 (function(){
   const inFrame=window.top!==window.self;
@@ -650,16 +634,12 @@ console.log(resp.choices[<span class="p">0</span>].message.content);</pre>
   });
 })();
 
-/* Tabs + 复制 */
+/* 复制 */
 (function(){
-  const tabs=document.querySelectorAll('.tab'),codes=document.querySelectorAll('.code');
-  tabs.forEach(t=>t.addEventListener('click',()=>{
-    tabs.forEach(x=>x.classList.toggle('on',x===t));
-    codes.forEach(c=>c.classList.toggle('on',c.dataset.c===t.dataset.t));
-  }));
   const btn=document.getElementById('copyBtn');
   btn.addEventListener('click',async()=>{
-    const txt=document.querySelector('.code.on').innerText;
+    const id=document.querySelector('.tabs input:checked').id.slice(2);
+    const txt=document.querySelector('.c-'+id).innerText;
     try{await navigator.clipboard.writeText(txt);btn.textContent='已复制 ✓'}catch(e){btn.textContent='复制失败'}
     setTimeout(()=>btn.textContent='复制',1600);
   });
