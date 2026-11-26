@@ -224,6 +224,7 @@ h2{font-size:clamp(30px,3.6vw,44px);font-weight:900;line-height:1.2;margin:14px 
 .route i{flex:1;height:6px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden;position:relative}
 .route i::after{content:"";position:absolute;inset:0;width:var(--w);background:linear-gradient(90deg,var(--violet),var(--moon));border-radius:6px}
 .route div{white-space:nowrap}
+.route .rn{width:128px;flex:none}
 .route em{font-style:normal;width:62px;text-align:right;color:var(--ok)}
 
 /* 接入步骤 */
@@ -348,11 +349,11 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
 <pre><span class="k">curl</span> https://api.midnightmind.net/v1/chat/completions \
   -H <span class="s">"Authorization: Bearer $MM_API_KEY"</span> \
   -d <span class="s">'{
-    "model": "<span class="rot"><span><b>deepseek-chat",</b><b>kimi-k2",</b><b>glm-4",</b><b>qwen3",</b><b>minimax-m1",</b><b>deepseek-chat",</b></span></span>
+    "model": "<span class="rot"><span><b>deepseek-v4-pro",</b><b>kimi-k3",</b><b>glm-5.3",</b><b>qwen4-max",</b><b>minimax-m3",</b><b>deepseek-v4-pro",</b></span></span>
     "messages": [{"role":"user","content":"午夜好"}]
   }'</span></pre>
         <div class="term-out">
-          <span class="rot r2"><span><b>“午夜好！DeepSeek 正在为你值守。”</b><b>“晚上好，Kimi 在线，想聊点什么？”</b><b>“GLM 已就绪，随时帮你写代码。”</b><b>“通义千问在此，今晚探索什么？”</b><b>“MiniMax 报到，长文档交给我。”</b><b>“午夜好！DeepSeek 正在为你值守。”</b></span></span>
+          <span class="rot r2"><span><b>“午夜好！DeepSeek 正在为你值守。”</b><b>“晚上好，Kimi 在线，想聊点什么？”</b><b>“GLM 已就绪，随时帮你写代码。”</b><b>“Qwen 在此，今晚想探索什么？”</b><b>“MiniMax 报到，长文档交给我。”</b><b>“午夜好！DeepSeek 正在为你值守。”</b></span></span>
           <span class="lat">200 OK · stream · 一个 Key 调用全部模型</span>
         </div>
         <div class="chips"><span class="chip">DeepSeek</span><span class="chip">Kimi</span><span class="chip">GLM</span><span class="chip">Qwen</span><span class="chip">MiniMax</span></div>
@@ -364,8 +365,8 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
 <!-- 跑马灯 -->
 <div class="marquee" aria-hidden="true">
   <div class="track">
-    <span>DeepSeek-V3</span><span>DeepSeek-R1</span><span>Kimi K2</span><span>GLM-4.x</span><span>Qwen3</span><span>MiniMax</span><span>Doubao Seed</span><span>Step</span><span>Hunyuan</span>
-    <span>DeepSeek-V3</span><span>DeepSeek-R1</span><span>Kimi K2</span><span>GLM-4.x</span><span>Qwen3</span><span>MiniMax</span><span>Doubao Seed</span><span>Step</span><span>Hunyuan</span>
+    <span>DeepSeek V4 Pro</span><span>DeepSeek V4 Flash</span><span>Kimi K3</span><span>GLM-5.3</span><span>Qwen4-Max</span><span>Qwen3.8</span><span>MiniMax M3</span>
+    <span>DeepSeek V4 Pro</span><span>DeepSeek V4 Flash</span><span>Kimi K3</span><span>GLM-5.3</span><span>Qwen4-Max</span><span>Qwen3.8</span><span>MiniMax M3</span>
   </div>
 </div>
 
@@ -387,37 +388,37 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
     <div class="sec-head reveal">
       <span class="eyebrow">// Model Plaza</span>
       <h2>一个入口，汇聚整片星空</h2>
-      <p>精选国内外最强开源与开放权重模型，覆盖对话、推理、长文本、代码与 Agent 场景。新模型上线，第一时间接入。</p>
+      <p>精选全球领先的开源与开放权重模型，覆盖对话、推理、长文本、代码与 Agent 场景。新模型发布，第一时间上线。</p>
     </div>
     <div class="models">
       <article class="model reveal">
-        <div class="model-top"><div class="mlogo" style="background:linear-gradient(135deg,#4d6bfe,#2a3fbf)">DS</div><div><h3>DeepSeek</h3><div class="vendor">深度求索</div></div></div>
-        <p>V3 通用对话与 R1 深度推理，数学、代码与复杂逻辑表现出众，性价比之选。</p>
-        <div class="tags"><span class="tag y">推理</span><span class="tag">代码</span><span class="tag">Function Call</span></div>
+        <div class="model-top"><div class="mlogo" style="background:linear-gradient(135deg,#4d6bfe,#2a3fbf)">DS</div><div><h3>DeepSeek</h3><div class="vendor">DeepSeek V4 Pro · V4 Flash</div></div></div>
+        <p>V4 Pro 主打深度推理，V4 Flash 兼顾速度与成本，代码、数学与复杂逻辑表现出众，性价比之选。</p>
+        <div class="tags"><span class="tag y">推理</span><span class="tag">代码</span><span class="tag">高性价比</span></div>
       </article>
       <article class="model reveal">
-        <div class="model-top"><div class="mlogo" style="background:linear-gradient(135deg,#1a1a1a,#3d3d3d);border:1px solid #555">K</div><div><h3>Kimi</h3><div class="vendor">月之暗面</div></div></div>
-        <p>K2 系列 MoE 大模型，超长上下文与强大的 Agent / 工具调用能力。</p>
-        <div class="tags"><span class="tag y">长上下文</span><span class="tag">Agent</span><span class="tag">工具调用</span></div>
+        <div class="model-top"><div class="mlogo" style="background:linear-gradient(135deg,#1a1a1a,#3d3d3d);border:1px solid #555">K</div><div><h3>Kimi</h3><div class="vendor">Moonshot AI · Kimi K3</div></div></div>
+        <p>K3 开放权重 MoE 旗舰，1M 超长上下文与原生视觉，擅长 Agent 与工具调用。</p>
+        <div class="tags"><span class="tag y">1M 上下文</span><span class="tag">Agent</span><span class="tag">视觉</span></div>
       </article>
       <article class="model reveal">
-        <div class="model-top"><div class="mlogo" style="background:linear-gradient(135deg,#3b5bdb,#7048e8)">GLM</div><div><h3>GLM</h3><div class="vendor">智谱</div></div></div>
-        <p>GLM-4 系列，中文理解扎实，编程与智能体任务能力强，支持视觉版本。</p>
-        <div class="tags"><span class="tag y">中文</span><span class="tag">编程</span><span class="tag">多模态</span></div>
+        <div class="model-top"><div class="mlogo" style="background:linear-gradient(135deg,#3b5bdb,#7048e8)">GLM</div><div><h3>GLM</h3><div class="vendor">Z.ai · GLM-5.3</div></div></div>
+        <p>GLM-5.3 旗舰模型，编程、推理与智能体任务能力强，适合复杂的多步工作流。</p>
+        <div class="tags"><span class="tag y">编程</span><span class="tag">推理</span><span class="tag">Agent</span></div>
       </article>
       <article class="model reveal">
-        <div class="model-top"><div class="mlogo" style="background:linear-gradient(135deg,#615ced,#8b5cf6)">Q</div><div><h3>Qwen</h3><div class="vendor">通义千问</div></div></div>
-        <p>Qwen3 全尺寸家族，从轻量到旗舰，混合思考模式随需切换。</p>
-        <div class="tags"><span class="tag y">全尺寸</span><span class="tag">思考模式</span><span class="tag">Coder</span></div>
+        <div class="model-top"><div class="mlogo" style="background:linear-gradient(135deg,#615ced,#8b5cf6)">Q</div><div><h3>Qwen</h3><div class="vendor">Alibaba · Qwen4-Max · Qwen3.8</div></div></div>
+        <p>Qwen4-Max 旗舰支持 1M 上下文与图像、视频输入；Qwen3.8 系列开放权重，尺寸丰富。</p>
+        <div class="tags"><span class="tag y">1M 上下文</span><span class="tag">多模态</span><span class="tag">开放权重</span></div>
       </article>
       <article class="model reveal">
-        <div class="model-top"><div class="mlogo" style="background:linear-gradient(135deg,#e8375a,#f76b1c)">M</div><div><h3>MiniMax</h3><div class="vendor">稀宇科技</div></div></div>
-        <p>高效长文本与 Agent 模型，适合大规模文档处理与多步任务编排。</p>
-        <div class="tags"><span class="tag y">长文本</span><span class="tag">高吞吐</span><span class="tag">Agent</span></div>
+        <div class="model-top"><div class="mlogo" style="background:linear-gradient(135deg,#e8375a,#f76b1c)">M</div><div><h3>MiniMax</h3><div class="vendor">MiniMax M3</div></div></div>
+        <p>M3 支持 1M 上下文与原生多模态，在代码与 Agent 任务上表现突出。</p>
+        <div class="tags"><span class="tag y">1M 上下文</span><span class="tag">代码</span><span class="tag">Agent</span></div>
       </article>
       <article class="model more reveal">
         <h3>+ 更多模型持续上线</h3>
-        <p>豆包、阶跃星辰、混元、Llama 等更多模型，以及 Embedding / Rerank 接口。</p>
+        <p>ByteDance Seed、StepFun、Tencent Hunyuan 等更多模型，以及 Embedding / Rerank 接口。</p>
         <span class="note">✦ 完整模型列表与实时单价，请在顶部导航中查看</span>
       </article>
     </div>
@@ -438,9 +439,9 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
         <h3>高可用，自动故障转移</h3>
         <p>分布式基础设施，实时监测服务状态与响应速度；遇到异常自动切换，请求不掉线。</p>
         <div class="route" aria-hidden="true">
-          <div>deepseek-chat<i style="--w:96%"></i><em>● 在线</em></div>
-          <div>kimi-k2<i style="--w:91%"></i><em>● 在线</em></div>
-          <div>glm-4<i style="--w:94%"></i><em>● 在线</em></div>
+          <div><span class="rn">deepseek-v4-pro</span><i style="--w:96%"></i><em>● 在线</em></div>
+          <div><span class="rn">kimi-k3</span><i style="--w:91%"></i><em>● 在线</em></div>
+          <div><span class="rn">glm-5.3</span><i style="--w:94%"></i><em>● 在线</em></div>
         </div>
       </div>
       <div class="feat wide reveal">
@@ -490,7 +491,7 @@ client = OpenAI(
 )
 
 resp = client.chat.completions.create(
-    model=<span class="s">"kimi-k2"</span>,  <span class="c"># 或 deepseek-chat / glm-4</span>
+    model=<span class="s">"kimi-k3"</span>,  <span class="c"># 或 deepseek-v4-pro / glm-5.3</span>
     messages=[{<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: <span class="s">"写一首关于午夜的诗"</span>}],
     stream=<span class="p">True</span>,
 )
@@ -504,7 +505,7 @@ client = Anthropic(
 )
 
 msg = client.messages.create(
-    model=<span class="s">"kimi-k2"</span>,  <span class="c"># 或 deepseek-chat / glm-4</span>
+    model=<span class="s">"kimi-k3"</span>,  <span class="c"># 或 deepseek-v4-pro / glm-5.3</span>
     max_tokens=<span class="p">1024</span>,
     messages=[{<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: <span class="s">"写一首关于午夜的诗"</span>}],
 )
@@ -513,7 +514,7 @@ print(msg.content[<span class="p">0</span>].text)</pre>
   -H <span class="s">"Content-Type: application/json"</span> \
   -H <span class="s">"Authorization: Bearer sk-mm-xxxxxxxx"</span> \
   -d <span class="s">'{
-    "model": "deepseek-reasoner",
+    "model": "deepseek-v4-pro",
     "messages": [{"role": "user", "content": "9.11 和 9.9 哪个大？"}],
     "stream": true
   }'</span></pre>
@@ -522,7 +523,7 @@ print(msg.content[<span class="p">0</span>].text)</pre>
   -H <span class="s">"x-api-key: sk-mm-xxxxxxxx"</span> \
   -H <span class="s">"anthropic-version: 2023-06-01"</span> \
   -d <span class="s">'{
-    "model": "deepseek-chat",
+    "model": "deepseek-v4-flash",
     "max_tokens": 1024,
     "messages": [{"role": "user", "content": "午夜好"}]
   }'</span></pre>
