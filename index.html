@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.add("js")</script>
 <title>MidnightMind API · 开源大模型聚合接口</title>
-<meta name="description" content="MidnightMind API：一个 Key，统一接入 DeepSeek、Kimi、GLM、Qwen 等主流开源大模型。OpenAI 协议兼容，按量计费，稳定低延迟。">
+<meta name="description" content="MidnightMind API：一个 Key，统一接入 DeepSeek、Kimi、GLM、Qwen 等主流开源大模型。兼容 OpenAI 与 Anthropic 协议，价格更优、可用性更高、无需订阅。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -223,7 +223,8 @@ h2{font-size:clamp(30px,3.6vw,44px);font-weight:900;line-height:1.2;margin:14px 
 .route div{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12.5px;color:var(--muted)}
 .route i{flex:1;height:6px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden;position:relative}
 .route i::after{content:"";position:absolute;inset:0;width:var(--w);background:linear-gradient(90deg,var(--violet),var(--moon));border-radius:6px}
-.route em{font-style:normal;width:62px;text-align:right;color:var(--text)}
+.route div{white-space:nowrap}
+.route em{font-style:normal;width:62px;text-align:right;color:var(--ok)}
 
 /* 接入步骤 */
 .steps{display:grid;grid-template-columns:1fr 1.25fr;gap:56px;align-items:start}
@@ -237,8 +238,9 @@ h2{font-size:clamp(30px,3.6vw,44px);font-weight:900;line-height:1.2;margin:14px 
 .tabbar{display:flex;gap:4px;padding:10px 12px 0;border-bottom:1px solid var(--line)}
 .tabbar label{font-family:var(--mono);font-size:13px;color:var(--muted);padding:9px 14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
 .code{display:none}
-#t-py:checked~.tabbar label[for=t-py],#t-js:checked~.tabbar label[for=t-js],#t-sh:checked~.tabbar label[for=t-sh]{color:var(--moon);border-color:var(--moon)}
-#t-py:checked~.c-py,#t-js:checked~.c-js,#t-sh:checked~.c-sh{display:block}
+#t-py:checked~.tabbar label[for=t-py],#t-an:checked~.tabbar label[for=t-an],#t-sh:checked~.tabbar label[for=t-sh],#t-ms:checked~.tabbar label[for=t-ms]{color:var(--moon);border-color:var(--moon)}
+#t-py:checked~.c-py,#t-an:checked~.c-an,#t-sh:checked~.c-sh,#t-ms:checked~.c-ms{display:block}
+.tabbar{flex-wrap:wrap}
 .copy{display:none;position:absolute;right:14px;top:58px;font-size:12px;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--muted);cursor:pointer;font-family:var(--mono)}
 .copy:hover{color:var(--text)}
 .js .copy{display:block}
@@ -322,16 +324,16 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="reveal">
-      <span class="badge"><i>NEW</i>OpenAI 协议兼容 · 改一行 base_url 即可切换</span>
+      <span class="badge"><i>NEW</i>兼容 OpenAI / Anthropic 协议 · 改一行 base_url 即可切换</span>
       <h1>夜深了，<br><span class="glow">模型还醒着。</span></h1>
-      <p class="lead">MidnightMind API 用<strong>一个 Key</strong>聚合 DeepSeek、Kimi、GLM、Qwen 等主流开源大模型。统一接口、智能路由、按量计费——让你的应用在任何时刻都有最聪明的大脑在线。</p>
+      <p class="lead">MidnightMind API 是大模型的统一接口：用<strong>一个 Key</strong>调用 DeepSeek、Kimi、GLM、Qwen 等主流开源大模型。更优的价格、更高的可用性、无需订阅——让你的应用在任何时刻都有最聪明的大脑在线。</p>
       <ol class="flow">
         <li><i>1</i>注册登录</li>
         <li><i>2</i>创建令牌 Key</li>
         <li><i>3</i>替换 base_url</li>
       </ol>
       <div class="hero-meta">
-        <span>7×24 小时在线</span><span>多上游自动容灾</span><span>无月费 · 用多少付多少</span>
+        <span>7×24 小时在线</span><span>高可用 · 自动故障转移</span><span>无订阅 · 用多少付多少</span>
       </div>
     </div>
 
@@ -342,8 +344,8 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
         <span class="crater" style="width:18px;height:18px;left:90px;top:170px"></span>
       </div>
       <div class="term">
-        <div class="term-bar"><span class="d"></span><span class="d"></span><span class="d"></span><em>POST /v1/chat/completions</em></div>
-<pre><span class="k">curl</span> https://midnightmind.net/v1/chat/completions \
+        <div class="term-bar"><span class="d"></span><span class="d"></span><span class="d"></span><em>POST /v1/chat/completions · /v1/messages</em></div>
+<pre><span class="k">curl</span> https://api.midnightmind.net/v1/chat/completions \
   -H <span class="s">"Authorization: Bearer $MM_API_KEY"</span> \
   -d <span class="s">'{
     "model": "<span class="rot"><span><b>deepseek-chat",</b><b>kimi-k2",</b><b>glm-4",</b><b>qwen3",</b><b>minimax-m1",</b><b>deepseek-chat",</b></span></span>
@@ -351,7 +353,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
   }'</span></pre>
         <div class="term-out">
           <span class="rot r2"><span><b>“午夜好！DeepSeek 正在为你值守。”</b><b>“晚上好，Kimi 在线，想聊点什么？”</b><b>“GLM 已就绪，随时帮你写代码。”</b><b>“通义千问在此，今晚探索什么？”</b><b>“MiniMax 报到，长文档交给我。”</b><b>“午夜好！DeepSeek 正在为你值守。”</b></span></span>
-          <span class="lat">200 OK · stream · 智能路由已选择最优上游</span>
+          <span class="lat">200 OK · stream · 一个 Key 调用全部模型</span>
         </div>
         <div class="chips"><span class="chip">DeepSeek</span><span class="chip">Kimi</span><span class="chip">GLM</span><span class="chip">Qwen</span><span class="chip">MiniMax</span></div>
       </div>
@@ -428,28 +430,28 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
     <div class="sec-head reveal">
       <span class="eyebrow">// Why MidnightMind</span>
       <h2>为开发者的每一个深夜而生</h2>
-      <p>你只管写业务，模型切换、上游故障、账单对账这些琐事，交给我们在夜里默默处理。</p>
+      <p>你只管写业务，模型切换、服务可用性、账单对账这些琐事，交给我们在夜里默默处理。</p>
     </div>
     <div class="features">
       <div class="feat wide reveal">
         <div class="ficon"><svg viewBox="0 0 24 24"><path d="M4 12h4l3-8 2 16 3-8h4"/></svg></div>
-        <h3>智能路由与自动容灾</h3>
-        <p>同一模型对接多个上游渠道，实时探测延迟与可用性，故障秒级切换，请求不掉线。</p>
+        <h3>高可用，自动故障转移</h3>
+        <p>分布式基础设施，实时监测服务状态与响应速度；遇到异常自动切换，请求不掉线。</p>
         <div class="route" aria-hidden="true">
-          <div>渠道 A<i style="--w:92%"></i><em>286ms</em></div>
-          <div>渠道 B<i style="--w:74%"></i><em>341ms</em></div>
-          <div>渠道 C<i style="--w:38%"></i><em>备用</em></div>
+          <div>deepseek-chat<i style="--w:96%"></i><em>● 在线</em></div>
+          <div>kimi-k2<i style="--w:91%"></i><em>● 在线</em></div>
+          <div>glm-4<i style="--w:94%"></i><em>● 在线</em></div>
         </div>
       </div>
       <div class="feat wide reveal">
         <div class="ficon"><svg viewBox="0 0 24 24"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></div>
-        <h3>100% OpenAI 协议兼容</h3>
-        <p>支持 Chat Completions、流式输出、Function Calling、JSON Mode。LangChain、Dify、Cursor、Cherry Studio 等工具开箱即用，只需替换 <code style="font-family:var(--mono);color:var(--moon)">base_url</code>。</p>
+        <h3>OpenAI / Anthropic 双协议兼容</h3>
+        <p>同时支持 <code style="font-family:var(--mono);color:var(--moon)">/v1/chat/completions</code> 与 <code style="font-family:var(--mono);color:var(--moon)">/v1/messages</code>，流式输出、Function Calling / Tools 开箱即用。OpenAI SDK、Anthropic SDK、LangChain、Dify、Cherry Studio 等工具只需替换 <code style="font-family:var(--mono);color:var(--moon)">base_url</code>。</p>
       </div>
       <div class="feat reveal">
         <div class="ficon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 9.5c0-1 1.3-1.8 3-1.8s3 .8 3 1.8-1.3 1.7-3 2-3 1-3 2 1.3 1.8 3 1.8 3-.8 3-1.8"/></svg></div>
         <h3>按量计费，透明账单</h3>
-        <p>按 Token 精确计费，无月费、无最低消费，每一次调用都可追溯。</p>
+        <p>按 Token 精确计费，无订阅、无最低消费，每一次调用都可追溯。</p>
       </div>
       <div class="feat reveal">
         <div class="ficon"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
@@ -472,19 +474,19 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;margin-top:40px;colo
       <span class="eyebrow">// Quick Start</span>
       <h2>三分钟，点亮你的第一盏灯</h2>
       <div class="step"><span class="n">1</span><div><h4>注册并创建 API Key</h4><p>邮箱注册即可，新用户赠送体验额度。</p></div></div>
-      <div class="step"><span class="n">2</span><div><h4>替换 base_url</h4><p>将 SDK 的接口地址指向 MidnightMind，原有代码无需改动。</p></div></div>
+      <div class="step"><span class="n">2</span><div><h4>替换 base_url</h4><p>OpenAI SDK 填 <code style="font-family:var(--mono);color:var(--moon)">https://api.midnightmind.net/v1</code>，Anthropic SDK 填 <code style="font-family:var(--mono);color:var(--moon)">https://api.midnightmind.net</code>，原有代码无需改动。</p></div></div>
       <div class="step"><span class="n">3</span><div><h4>自由切换模型</h4><p>修改 <code style="font-family:var(--mono);color:var(--moon)">model</code> 参数，在 DeepSeek、Kimi、GLM 之间随心切换。</p></div></div>
     </div>
     <div class="term tabs reveal" style="position:relative">
       <div class="term-bar"><span class="d"></span><span class="d"></span><span class="d"></span><em>quickstart</em></div>
-      <input type="radio" name="qs" id="t-py" checked><input type="radio" name="qs" id="t-js"><input type="radio" name="qs" id="t-sh">
-      <div class="tabbar"><label for="t-py">Python</label><label for="t-js">Node.js</label><label for="t-sh">cURL</label></div>
+      <input type="radio" name="qs" id="t-py" checked><input type="radio" name="qs" id="t-an"><input type="radio" name="qs" id="t-sh"><input type="radio" name="qs" id="t-ms">
+      <div class="tabbar"><label for="t-py">OpenAI SDK</label><label for="t-an">Anthropic SDK</label><label for="t-sh">cURL · chat</label><label for="t-ms">cURL · messages</label></div>
       <button class="copy" id="copyBtn">复制</button>
 <pre class="code c-py"><span class="k">from</span> openai <span class="k">import</span> OpenAI
 
 client = OpenAI(
     api_key=<span class="s">"sk-mm-xxxxxxxx"</span>,
-    base_url=<span class="s">"https://midnightmind.net/v1"</span>,
+    base_url=<span class="s">"https://api.midnightmind.net/v1"</span>,
 )
 
 resp = client.chat.completions.create(
@@ -494,25 +496,35 @@ resp = client.chat.completions.create(
 )
 <span class="k">for</span> chunk <span class="k">in</span> resp:
     print(chunk.choices[<span class="p">0</span>].delta.content <span class="k">or</span> <span class="s">""</span>, end=<span class="s">""</span>)</pre>
-<pre class="code c-js"><span class="k">import</span> OpenAI <span class="k">from</span> <span class="s">"openai"</span>;
+<pre class="code c-an"><span class="k">from</span> anthropic <span class="k">import</span> Anthropic
 
-<span class="k">const</span> client = <span class="k">new</span> OpenAI({
-  apiKey: <span class="s">"sk-mm-xxxxxxxx"</span>,
-  baseURL: <span class="s">"https://midnightmind.net/v1"</span>,
-});
+client = Anthropic(
+    api_key=<span class="s">"sk-mm-xxxxxxxx"</span>,
+    base_url=<span class="s">"https://api.midnightmind.net"</span>,  <span class="c"># SDK 会自动拼接 /v1/messages</span>
+)
 
-<span class="k">const</span> resp = <span class="k">await</span> client.chat.completions.create({
-  model: <span class="s">"glm-4"</span>,  <span class="c">// 或 deepseek-reasoner / qwen3</span>
-  messages: [{ role: <span class="s">"user"</span>, content: <span class="s">"你好，MidnightMind"</span> }],
-});
-console.log(resp.choices[<span class="p">0</span>].message.content);</pre>
-<pre class="code c-sh"><span class="k">curl</span> https://midnightmind.net/v1/chat/completions \
+msg = client.messages.create(
+    model=<span class="s">"kimi-k2"</span>,  <span class="c"># 或 deepseek-chat / glm-4</span>
+    max_tokens=<span class="p">1024</span>,
+    messages=[{<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: <span class="s">"写一首关于午夜的诗"</span>}],
+)
+print(msg.content[<span class="p">0</span>].text)</pre>
+<pre class="code c-sh"><span class="k">curl</span> https://api.midnightmind.net/v1/chat/completions \
   -H <span class="s">"Content-Type: application/json"</span> \
   -H <span class="s">"Authorization: Bearer sk-mm-xxxxxxxx"</span> \
   -d <span class="s">'{
     "model": "deepseek-reasoner",
     "messages": [{"role": "user", "content": "9.11 和 9.9 哪个大？"}],
     "stream": true
+  }'</span></pre>
+<pre class="code c-ms"><span class="k">curl</span> https://api.midnightmind.net/v1/messages \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -H <span class="s">"x-api-key: sk-mm-xxxxxxxx"</span> \
+  -H <span class="s">"anthropic-version: 2023-06-01"</span> \
+  -d <span class="s">'{
+    "model": "deepseek-chat",
+    "max_tokens": 1024,
+    "messages": [{"role": "user", "content": "午夜好"}]
   }'</span></pre>
     </div>
   </div>
@@ -538,7 +550,7 @@ console.log(resp.choices[<span class="p">0</span>].message.content);</pre>
         <h3>月光 · 按量付费</h3>
         <p class="desc">初创团队与生产应用</p>
         <div class="price">按 Token<small>计费</small></div>
-        <ul><li>余额充值，随用随扣</li><li>更高并发与速率</li><li>智能路由 + 自动容灾</li><li>用量明细与多 Key 管理</li><li>工单优先响应</li></ul>
+        <ul><li>余额充值，随用随扣</li><li>更高并发与速率</li><li>高可用 + 自动故障转移</li><li>用量明细与多 Key 管理</li><li>工单优先响应</li></ul>
         <div class="plan-note hot-note">登录控制台即可在线充值</div>
       </div>
       <div class="plan reveal">
@@ -560,9 +572,9 @@ console.log(resp.choices[<span class="p">0</span>].message.content);</pre>
       <h2>常见问题</h2>
     </div>
     <div class="faq reveal">
-      <details open><summary>MidnightMind API 和直接调用官方接口有什么区别？</summary><p>你只需管理一个 Key、一份账单，就能调用多家厂商的模型；同时我们为每个模型配置多个上游渠道，单一渠道异常时会自动切换，稳定性更高。</p></details>
-      <details><summary>现有项目迁移需要改多少代码？</summary><p>我们完全兼容 OpenAI 协议。通常只需修改 <code>base_url</code> 与 <code>api_key</code> 两处配置，再把 <code>model</code> 改为想用的模型名即可。</p></details>
-      <details><summary>支持流式输出和函数调用吗？</summary><p>支持。SSE 流式输出、Function Calling / Tools、JSON Mode 等能力会随上游模型的支持情况同步开放。</p></details>
+      <details open><summary>MidnightMind API 和直接调用官方接口有什么区别？</summary><p>你只需管理一个 Key、一份账单，就能调用多家厂商的模型，无需逐一注册、充值和对接；平台具备高可用架构与自动故障转移，服务更稳定。</p></details>
+      <details><summary>现有项目迁移需要改多少代码？</summary><p>我们同时兼容 OpenAI（<code>/v1/chat/completions</code>）与 Anthropic（<code>/v1/messages</code>）协议。通常只需修改 <code>base_url</code> 与 <code>api_key</code> 两处配置，再把 <code>model</code> 改为想用的模型名即可。</p></details>
+      <details><summary>支持流式输出和函数调用吗？</summary><p>支持。SSE 流式输出、Function Calling / Tools、JSON Mode 等能力会随模型自身的支持情况同步开放。</p></details>
       <details><summary>你们会保存我的对话数据吗？</summary><p>不会。我们仅记录计费所需的 Token 用量与调用元信息，不存储请求与回复内容。</p></details>
       <details><summary>如何充值与开具发票？</summary><p>控制台支持在线充值，余额永不过期。企业用户可联系商务进行对公转账并开具发票。</p></details>
     </div>
@@ -593,7 +605,7 @@ console.log(resp.choices[<span class="p">0</span>].message.content);</pre>
         <span class="logo" style="margin-bottom:14px"><span>Midnight<b>Mind</b> API</span></span>
         <p style="max-width:320px">开源大模型聚合 API 平台。一个 Key，统一接入 DeepSeek、Kimi、GLM、Qwen 等模型。</p>
       </div>
-      <div class="foot-api"><h5>接口地址</h5><code>https://midnightmind.net/v1</code><p>兼容 OpenAI 协议 · 7×24 小时在线</p></div>
+      <div class="foot-api"><h5>接口地址</h5><code>https://api.midnightmind.net/v1</code><p>支持 /v1/chat/completions 与 /v1/messages · 7×24 小时在线</p></div>
     </div>
     <div class="copyright"><span>© 2026 MidnightMind API. All rights reserved.</span><span>Made for the night owls 🌙</span></div>
   </div>
